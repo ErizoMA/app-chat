@@ -1,4 +1,4 @@
-import { Model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const chatSchema = Schema({
   name: { type: String, trim: true, required: true, minLength: 3 },
@@ -10,4 +10,4 @@ const chatSchema = Schema({
   timestamps: true,
 })
 
-export default Model("Chat", chatSchema)
+export default model("Chat", chatSchema)

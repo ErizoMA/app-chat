@@ -1,4 +1,4 @@
-import { Model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const messageSchema = Schema({
   createdBy: { type: Schema.Types.ObjectId, ref: "User" },
@@ -10,4 +10,4 @@ const messageSchema = Schema({
   timestamps: true,
 })
 
-export default Model("Message", messageSchema)
+export default model("Message", messageSchema)
