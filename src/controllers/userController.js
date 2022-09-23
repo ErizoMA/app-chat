@@ -16,7 +16,7 @@ export const loginUser = async (req, res) => {
     if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" })
 
     const token = jwt.sign({ id: userFound._id }, SECRET, { expiresIn: "1h" })
-    return res.status(200).json({ data: { _id: userFound._id, name: userFound.name, avatar: userFound.avatar }, token })
+    return res.status(200).json({ data: { _id: userFound._id, name: userFound.name, avatar: userFound.avatar, email: userFound, email }, token })
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -42,4 +42,13 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message }) // TODO Improve this (Invalid Email !== Internal Error)
   }
+}
+
+export const searchUser = async (req, res) => {
+  const users = await User.find({
+    $or: [
+      { email: { $regex: req.query.search, $options: 'i' } },
+      { name: { $regex: req.query.search, $options: 'i' } }]
+  }, '-password')
+  res.status(200).json({ data: users })
 }
