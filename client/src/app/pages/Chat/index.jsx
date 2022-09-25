@@ -1,4 +1,5 @@
 import React from 'react'
+import ArrowIcon from '../../components/Icons/Arrow'
 import RightSectionEmpty from '../../components/RightSectionEmpty'
 import styles from './index.module.css'
 
@@ -8,7 +9,7 @@ function Chat () {
       <section className={styles.leftSection}>
         <div className={styles.leftSectionHeader}>
           <img src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250' />
-          <span>v</span>
+          <ArrowIcon />
         </div>
         <input className={styles.leftSectionSearch} placeholder='Search or start a new chat' />
         <div className={styles.leftSectionTabs}>
