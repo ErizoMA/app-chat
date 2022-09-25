@@ -119,7 +119,9 @@
 }
 
 .rightSection {
-  background-color: white;
+  background-color: #FAFAFA;
   flex: 1;
-  min-width: 760px;
+  display: grid;
+  place-items: center;
+  /* border: 1px solid red; */
 }

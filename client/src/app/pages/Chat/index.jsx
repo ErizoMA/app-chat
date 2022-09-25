@@ -1,4 +1,5 @@
 import React from 'react'
+import RightSectionEmpty from '../../components/RightSectionEmpty'
 import styles from './index.module.css'
 
 function Chat () {
@@ -59,9 +60,7 @@ function Chat () {
 
         </div>
       </section>
-      <section className={styles.rightSection}>
-        right
-      </section>
+      <RightSectionEmpty />
     </div>
   )
 }
