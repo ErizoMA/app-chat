@@ -1,10 +1,8 @@
-import './App.css'
+import RoutesPage from './app/configuration/routes/Router.jsx'
 
-function App() {
-
+function App () {
   return (
-    <div className="App">
-    </div>
+    <RoutesPage />
   )
 }
 
