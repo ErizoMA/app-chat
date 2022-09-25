@@ -1,0 +1,125 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.leftSection {
+  background-color: #F5FAFC;
+  /* flex: 0.33; */
+  min-width: 360px;
+  padding: 1.25rem 1.5rem;
+}
+
+.leftSectionHeader {
+  /* background-color: red; */
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.leftSectionHeader>img {
+  border-radius: 50%;
+  height: 100%;
+}
+
+.leftSectionSearch {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #D1E4E8;
+  border-radius: 24px;
+  background-color: #FFFFFF;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 1.5rem;
+}
+
+.leftSectionTabs {
+  display: flex;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.leftSectionTabs>div {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.leftSectionTabs div:first-child {
+  background-color: #128C7E;
+  color: white;
+  border-radius: 12px 0 0 12px;
+}
+
+.leftSectionTabs div:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.leftSectionChat {
+  padding: 0.5rem 0.75rem;
+  height: 76px;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.leftSectionChat>img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.leftSectionChat>div {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.leftSectionChat>div>div {
+  flex: 0.75
+}
+
+.leftSectionChat>div>span {
+  flex: 0.25;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 16px;
+  color: #829C99;
+}
+
+.chatDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chatDetails p:first-child {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.chatDetails p:last-child {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.rightSection {
+  background-color: white;
+  flex: 1;
+  min-width: 760px;
+}

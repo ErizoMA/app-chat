@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import Chat from '../../pages/Chat'
 import Home from '../../pages/Home'
 import ROUTES from './Routes'
 function RoutesPage () {
@@ -6,7 +7,7 @@ function RoutesPage () {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
-        <Route path={ROUTES.CHATS} element={<h1>Chat</h1>} />
+        <Route path={ROUTES.CHATS} element={<Chat />} />
       </Routes>
     </BrowserRouter>
   )
