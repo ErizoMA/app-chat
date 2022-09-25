@@ -1,5 +1,6 @@
 import React from 'react'
 import ArrowIcon from '../../components/Icons/Arrow'
+import RightSection from '../../components/RightSection'
 import RightSectionEmpty from '../../components/RightSectionEmpty'
 import styles from './index.module.css'
 
@@ -61,7 +62,8 @@ function Chat () {
 
         </div>
       </section>
-      <RightSectionEmpty />
+      {/* <RightSectionEmpty /> */}
+      <RightSection />
     </div>
   )
 }
