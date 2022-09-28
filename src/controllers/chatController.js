@@ -8,7 +8,7 @@ export const createChat = async (req, res) => {
 
   try {
 
-    let chatFounded = await Chat.find({
+    let chat = await Chat.find({
       isGroup: false,
       $and: [
         { users: { $elemMatch: { $eq: req.user._id } } },
@@ -16,31 +16,36 @@ export const createChat = async (req, res) => {
       ]
     }).populate("users", "-password").populate("lastMessage")
 
-    // chatFounded = await User.populate(chatFounded, {
-    //   path: "lastMessage.createdBy",
-    //   select: "name avatar email "
-    // })
+    // THIS SEEMS BETTER CAUSE CHAT IS AN ARRAY
+    chat = await User.populate(chat, {
+      path: "lastMessage.createdBy",
+      select: "name avatar email "
+    })
+    // OTHER WAY , NOT SURE IF IM POPULATING ONLY ONE DOCUMENT
+    // chat = await chat[0].populate("lastMessage.createdBy", "name avatar email", "User")
 
-    // console.log(chatFounded)
-    res.status(200).json({ data: chatFounded })
+    if (chat.length > 0) return res.status(200).json({ data: chat })
 
+    let newChat = await Chat.create({
+      name: "defaultName",
+      isGroup: false,
+      users: [req.user._id, userId]
+    })
+    newChat = await newChat.populate("users", "-password", "User")
+    return res.status(200).json({ data: newChat })
 
   } catch (error) {
     console.log(error)
-
-
+    return res.status(500).json({ message: error.message })
   }
+}
 
+export const indexChats = async (req, res) => {
 
+  let chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+    .populate("lastMessage")
+    .populate("users", "-password")
 
-
-
-  // const chat = await Chat.create({
-  //   name: "defaultName",
-  //   isGroup: false,
-  //   users: [req.user._id, userId]
-  // })
-
-  // const chatDetailed = await Chat.findOne({ _id: chat._id }).populate("users", "-password")
-  // return res.status(200).json({ data: chatDetailed })
+  chats = await User.populate(chats, { path: "lastMessage.createdBy", select: "name avatar email" })
+  return res.status(200).json({ data: chats })
 }

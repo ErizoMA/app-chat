@@ -1,7 +1,5 @@
 import Chat from "../models/chat.js"
 import Message from "../models/message.js"
-import User from "../models/user.js"
-
 
 export const createMessage = async (req, res) => {
 
@@ -43,4 +41,16 @@ export const createMessage = async (req, res) => {
   await Chat.findByIdAndUpdate(chatId, { lastMessage: message })
   res.json({ data: message })
 
+}
+
+export const indexMessages = async (req, res) => {
+  try {
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate("createdBy", "name avatar email")
+      .populate("chat")
+    res.status(200).json({ data: messages })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ data: error.message })
+  }
 }
