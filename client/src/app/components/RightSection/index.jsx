@@ -13,7 +13,7 @@ function RightSection () {
     <div className={styles.container}>
       <ChatHeader name={name} />
       <ChatMessages selectedChat={selectedChat} />
-      <ChatFooter />
+      <ChatFooter selectedChat={selectedChat} />
     </div>
 
   )
