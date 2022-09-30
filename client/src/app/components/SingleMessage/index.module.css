@@ -1,0 +1,15 @@
+.message {
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 16px 16px 16px 0px;
+  width: 304px;
+}
+
+.message__right {
+  background-color: #D7F8F4;
+  padding: 1rem 1.5rem;
+  border-radius: 16px 16px 0px 16px;
+  width: 304px;
+  margin-left: auto;
+  /* border: 1px solid green; */
+}

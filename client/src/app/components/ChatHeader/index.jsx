@@ -7,14 +7,14 @@ import SearchIcon from '../Icons/Search'
 import VideoCallIcon from '../Icons/VideoCall'
 import styles from './index.module.css'
 
-function ChatHeader () {
+function ChatHeader ({ name }) {
   return (
     <div className={styles.header}>
       <div className={styles.header__info}>
         <img src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250' />
         <section>
           <div>
-            <h2>Jane Cooper</h2>
+            <h2>{name}</h2>
             <FavouriteIcon />
           </div>
           <div>

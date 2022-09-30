@@ -1,4 +1,4 @@
-import { GET_CHATS, LOGIN, LOGOUT, REGISTER } from './types'
+import { GET_CHATS, LOGIN, LOGOUT, REGISTER, SELECT_CHAT } from './types'
 
 export default (state, action) => {
   const { payload, type } = action
@@ -19,6 +19,10 @@ export default (state, action) => {
     case GET_CHATS:
       return {
         ...state, chats: payload
+      }
+    case SELECT_CHAT:
+      return {
+        ...state, selectedChat: payload
       }
 
     default:

@@ -1,10 +1,10 @@
 import UserContext from './UserContext'
 import UserReducer from './UserReducer'
 import { useReducer } from 'react'
-import { GET_CHATS, LOGIN } from './types'
+import { GET_CHATS, LOGIN, SELECT_CHAT } from './types'
 
 const UserProvider = (props) => {
-  const initialState = { userInfo: '', chats: [] }
+  const initialState = { userInfo: '', chats: [], selectedChat: null }
 
   const [state, dispatch] = useReducer(UserReducer, initialState)
 
@@ -41,8 +41,12 @@ const UserProvider = (props) => {
     }
   }
 
+  const selectChat = (chat) => {
+    dispatch({ type: SELECT_CHAT, payload: chat })
+  }
+
   return (
-    <UserContext.Provider value={{ login, userInfo: state.userInfo, getChats, chats: state.chats }}>
+    <UserContext.Provider value={{ login, userInfo: state.userInfo, getChats, chats: state.chats, selectChat, selectedChat: state.selectedChat }}>
       {props.children}
     </UserContext.Provider>
   )
