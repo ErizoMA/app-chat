@@ -1,0 +1,56 @@
+.container {
+  position: relative;
+}
+
+.container>svg {
+  position: absolute;
+  top: 18%;
+  right: 15px;
+}
+
+.leftSectionSearch {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #D1E4E8;
+  border-radius: 24px;
+  background-color: #FFFFFF;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 1.5rem;
+  outline-color: #128C7E;
+
+}
+
+.resultsContainer {
+  width: 100%;
+  box-shadow: 0px 24px 64px rgba(45, 48, 58, 0.06);
+  border-radius: 12px;
+  padding: 12px 0 16px;
+  position: absolute;
+  top: 60px;
+  background-color: white;
+}
+
+.result {
+  height: 40px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  display: flex;
+  background-color: #EFFAFD;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.result>img {
+  height: 100%;
+  border-radius: 8px;
+
+}
+
+.result>h2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  color: #2F3A5F;
+}

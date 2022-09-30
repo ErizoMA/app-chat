@@ -1,8 +1,3 @@
-.container {
-  display: flex;
-  height: 100vh;
-}
-
 .leftSection {
   background-color: #F5FAFC;
   /* flex: 0.33; */
@@ -64,57 +59,4 @@
 
 .leftSectionTabs div:last-child {
   border-radius: 0 12px 12px 0;
-}
-
-.leftSectionChat {
-  padding: 0.5rem 0.75rem;
-  height: 76px;
-  display: flex;
-  gap: 0.75rem;
-}
-
-.leftSectionChat>img {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-}
-
-.leftSectionChat>div {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.leftSectionChat>div>div {
-  flex: 0.75
-}
-
-.leftSectionChat>div>span {
-  flex: 0.25;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 16px;
-  color: #829C99;
-}
-
-.chatDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.chatDetails p:first-child {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.chatDetails p:last-child {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
 }
