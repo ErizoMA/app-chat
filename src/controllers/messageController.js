@@ -4,7 +4,6 @@ import Message from "../models/message.js"
 export const createMessage = async (req, res) => {
 
   const { body, chatId } = req.body
-  console.log(body, chatId)
   if (!body || !chatId) return res.status(400).json({ message: "Invalid request" })
 
   let message = await Message.create({
@@ -12,8 +11,6 @@ export const createMessage = async (req, res) => {
     body,
     chat: chatId
   })
-
-  console.log("message", message)
 
   message = await message.populate("createdBy", "name avatar")
   message = await message.populate("chat")

@@ -5,15 +5,24 @@ import UserContext from '../../context/UserContext'
 import LeftSectionSearch from '../LeftSectionSearch'
 import ChatItem from '../ChatItem'
 
-function LeftSection () {
+function LeftSection ({ socket }) {
   const { getChats, chats } = useContext(UserContext)
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await getChats()
+  //   }
+  //   fetchData()
+  // }, [])
+
   useEffect(() => {
-    const fetchData = async () => {
-      await getChats()
-    }
-    fetchData()
-  }, [])
+    socket.on('message received', () => {
+      const fetchData = async () => {
+        await getChats()
+      }
+      fetchData()
+    })
+  })
   return (
     <section className={styles.leftSection}>
       <div className={styles.leftSectionHeader}>

@@ -3,8 +3,7 @@ import EmojiIcon from '../Icons/Emoji'
 import PlusIcon from '../Icons/Plus'
 import VoiceIcon from '../Icons/Voice'
 import styles from './index.module.css'
-
-function ChatFooter ({ selectedChat }) {
+function ChatFooter ({ selectedChat, socket }) {
   const [message, setMessage] = useState('')
   const handleMessage = async (e) => {
     if (e.key === 'Enter') {
@@ -16,7 +15,8 @@ function ChatFooter ({ selectedChat }) {
           chatId: selectedChat._id
         })
       })
-      // const data = await response.json()
+      const data = await response.json()
+      socket.emit('new message', data.data)
       setMessage('')
     }
   }
