@@ -28,7 +28,6 @@ export const registerUser = async (req, res) => {
   try {
     const { email, password, name, avatar } = req.body
     if (!name || !email || !password) return res.status(400).json({ message: "Missing fields" })
-
     const userFound = await User.findOne({ email })
     if (userFound) return res.status(400).json({ message: "User already exists" })
 
@@ -40,6 +39,7 @@ export const registerUser = async (req, res) => {
 
     return res.status(201).json({ data: { _id: user._id, name: user.name, avatar: user.avatar }, token })
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({ message: error.message }) // TODO Improve this (Invalid Email !== Internal Error)
   }
 }

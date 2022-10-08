@@ -1,7 +1,8 @@
 import UserContext from './UserContext'
 import UserReducer from './UserReducer'
 import { useReducer } from 'react'
-import { GET_CHATS, LOGIN, SELECT_CHAT } from './types'
+import * as AuthService from '../services/Auth'
+import { GET_CHATS, LOGIN, REGISTER, SELECT_CHAT } from './types'
 
 const UserProvider = (props) => {
   const initialState = { userInfo: '', chats: [], selectedChat: null }
@@ -9,20 +10,17 @@ const UserProvider = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
 
   const login = async (form) => {
-    try {
-      const response = await fetch('http://localhost:4000/api/user/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-        mode: 'cors'
-      })
-      const data = await response.json()
-      if (response.ok) {
-        dispatch({ type: LOGIN, payload: data.data })
-        localStorage.setItem('token', JSON.stringify(data.token))
-      }
-    } catch (error) {
-      console.log(error.message)
+    const { status, ok, data } = await AuthService.login(form)
+    if (ok && status === 200) {
+      dispatch({ type: LOGIN, payload: data.data })
+      localStorage.setItem('token', JSON.stringify(data.token))
+    }
+  }
+  const register = async (form) => {
+    const { status, ok, data } = await AuthService.register(form)
+    if (ok && status === 201) {
+      dispatch({ type: REGISTER, payload: data.data })
+      localStorage.setItem('token', JSON.stringify(data.token))
     }
   }
   const getChats = async () => {
@@ -46,7 +44,7 @@ const UserProvider = (props) => {
   }
 
   return (
-    <UserContext.Provider value={{ login, userInfo: state.userInfo, getChats, chats: state.chats, selectChat, selectedChat: state.selectedChat }}>
+    <UserContext.Provider value={{ login, register, userInfo: state.userInfo, getChats, chats: state.chats, selectChat, selectedChat: state.selectedChat }}>
       {props.children}
     </UserContext.Provider>
   )

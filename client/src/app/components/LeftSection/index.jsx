@@ -8,12 +8,12 @@ import ChatItem from '../ChatItem'
 function LeftSection ({ socket }) {
   const { getChats, chats } = useContext(UserContext)
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     await getChats()
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      await getChats()
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     socket.on('message received', () => {

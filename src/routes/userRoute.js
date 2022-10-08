@@ -3,8 +3,8 @@ import { loginUser, registerUser, searchUser } from "../controllers/userControll
 
 const router = Router();
 
-router.post("/", registerUser)
-router.get("/",searchUser)
+router.post("/register", registerUser)
+router.get("/", searchUser)
 router.post("/login", loginUser)
 
 

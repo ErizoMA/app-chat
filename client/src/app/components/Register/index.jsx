@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import UserContext from '../../context/UserContext'
 import styles from './index.module.css'
 
 function Register ({ toggleScreen }) {
-  const [form, setForm] = useState({ email: '', name: '', password: '', cpassword: '' })
+  const [form, setForm] = useState({ email: '', name: '', password: '', avatar: '' })
+  const navigate = useNavigate()
+  const { register } = useContext(UserContext)
 
-  const handleSubmit = (e) => {
-    console.log(form)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await register(form)
+    const token = JSON.parse(localStorage.getItem('token'))
+    if (token) navigate('/chats')
   }
 
   return (
@@ -14,9 +21,9 @@ function Register ({ toggleScreen }) {
       <form className={styles.form}>
         <input className={styles.input} placeholder='Complete name' autoComplete='off' required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
         <input className={styles.input} placeholder='Email' type='email' value={form.email} required onChange={(e) => setForm({ ...form, email: e.target.value })} />
-        {/* <input className={styles.input} placeholder='Avatar' value={form.avatar} onChange={(e) => setForm({ ...form, avatar: e.target.value })} /> */}
+        <input className={styles.input} placeholder='Avatar' value={form.avatar} onChange={(e) => setForm({ ...form, avatar: e.target.value })} />
         <input className={styles.input} placeholder='Password' type='password' value={form.password} minLength='6' required onChange={(e) => setForm({ ...form, password: e.target.value })} />
-        <input className={styles.input} placeholder='Confirm Password' type='password' value={form.cpassword} required minLength='6' onChange={(e) => setForm({ ...form, cpassword: e.target.value })} />
+        {/* <input className={styles.input} placeholder='Confirm Password' type='password' value={form.cpassword} required minLength='6' onChange={(e) => setForm({ ...form, cpassword: e.target.value })} /> */}
         <button className={styles.btnSubmit} onClick={(e) => handleSubmit(e)}>
           CREATE ACCOUNT
         </button>
