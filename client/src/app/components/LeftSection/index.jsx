@@ -1,32 +1,17 @@
 import styles from './index.module.css'
 import ArrowIcon from '../Icons/Arrow'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import UserContext from '../../context/UserContext'
 import LeftSectionSearch from '../LeftSectionSearch'
-import ChatItem from '../ChatItem'
+import ChatList from '../ChatList'
 
 function LeftSection ({ socket }) {
-  const { getChats, chats } = useContext(UserContext)
+  const { userInfo } = useContext(UserContext)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getChats()
-    }
-    fetchData()
-  }, [])
-
-  useEffect(() => {
-    socket.on('message received', () => {
-      const fetchData = async () => {
-        await getChats()
-      }
-      fetchData()
-    })
-  })
   return (
     <section className={styles.leftSection}>
       <div className={styles.leftSectionHeader}>
-        <img src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250' />
+        <img src={userInfo.avatar} />
         <ArrowIcon />
       </div>
       <LeftSectionSearch />
@@ -35,13 +20,7 @@ function LeftSection ({ socket }) {
         <div>Friends</div>
         <div>Groups</div>
       </div>
-      <div>
-        {chats.map(chat => {
-          return (
-            <ChatItem chat={chat} key={chat._id} />
-          )
-        })}
-      </div>
+      <ChatList socket={socket} />
     </section>
   )
 }

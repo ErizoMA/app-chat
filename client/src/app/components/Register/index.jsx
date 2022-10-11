@@ -12,7 +12,7 @@ function Register ({ toggleScreen }) {
     e.preventDefault()
     await register(form)
     const token = JSON.parse(localStorage.getItem('token'))
-    if (token) navigate('/chats')
+    if (token) navigate('/chats', { replace: true })
   }
 
   return (

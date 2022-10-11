@@ -12,7 +12,7 @@ function Login ({ toggleScreen }) {
     e.preventDefault()
     await login(form)
     const token = JSON.parse(localStorage.getItem('token'))
-    if (token) navigate('/chats')
+    if (token) navigate('/chats', { replace: true })
   }
 
   return (

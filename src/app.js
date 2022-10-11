@@ -9,6 +9,7 @@ import chatRoute from "./routes/chatRoute.js";
 import messageRoute from "./routes/messageRoute.js";
 import { verifyToken } from "./middlewares/auth.js";
 import { PORT } from "./config.js";
+import { userInfo } from "os";
 
 const app = express()
 const httpServer = createServer(app)
@@ -19,19 +20,26 @@ const io = new SocketServer(httpServer, {
 })
 
 io.on('connection', (socket) => {
-  console.log("Connected to socket.io")
+  console.log("Nuevo usuario conectado", socket.id)
   socket.on('setup', (userInfo) => {
     console.log("userId", userInfo._id)
     socket.join(userInfo._id)
     socket.emit('connected')
   })
   socket.on('new message', (msg) => {
+    console.log("New message")
     const chat = msg.chat
     chat.users.forEach(user => {
-      socket.join('chat:' + chat._id)
+      io.to(user._id).emit('message received', msg)
     })
-    io.to('chat:' + chat._id).emit('message received', msg)
   })
+  socket.on('disconnecting', () => {
+    console.log(socket.rooms)
+  })
+  socket.on('disconnect', () => {
+    console.log("Usuario desconectado", socket.id)
+  })
+
 })
 app.use(cors())
 app.use(express.json())

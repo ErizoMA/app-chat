@@ -19,7 +19,7 @@ function ChatMessages ({ selectedChat, socket }) {
 
   useEffect(() => {
     socket.on('message received', (msg) => {
-      console.log('new message', msg)
+      console.log('message received => add msg to body', msg)
       setMessages([...messages, msg])
     })
     return () => {
@@ -33,10 +33,11 @@ function ChatMessages ({ selectedChat, socket }) {
   })
   return (
     <div className={styles.container} id='scrollbar'>
-      {messages.length === 0 && <div className={styles.encrypted}>
-        <LockIcon />
-        Messages are end-to-end encrypted. No one outside of this chat, not even <br /> WhatsApp can read or listen to them click to learn more.
-      </div>}
+      {messages.length === 0 &&
+        <div className={styles.encrypted}>
+          <LockIcon />
+          Messages are end-to-end encrypted. No one outside of this chat, not even <br /> WhatsApp can read or listen to them click to learn more.
+        </div>}
       {messages.map(msg => {
         return (
           <SingleMessage msg={msg} key={msg._id} />

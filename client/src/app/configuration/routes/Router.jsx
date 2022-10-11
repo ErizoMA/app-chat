@@ -7,10 +7,10 @@ function RoutesPage () {
   return (
     <Routes>
       <Route index element={<Home />} />
-      {/* <Route element={<ProtectedRoute />}>
+      <Route element={<ProtectedRoute />}>
         <Route path={ROUTES.CHATS} element={<Chat />} />
-      </Route> */}
-      <Route path={ROUTES.CHATS} element={<Chat />} />
+      </Route>
+      {/* <Route path={ROUTES.CHATS} element={<Chat />} /> */}
     </Routes>
   )
 }

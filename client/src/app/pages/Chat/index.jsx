@@ -16,6 +16,9 @@ function Chat () {
     socket.on('connected', () => {
       console.log('connected')
     })
+    return () => {
+      socket.off('connected')
+    }
   }, [])
 
   return (
