@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import UserContext from '../../context/UserContext'
+import { formatTime } from '../../utils/date'
 import styles from './index.module.css'
 
 function ChatItem ({ chat }) {
@@ -13,7 +14,7 @@ function ChatItem ({ chat }) {
           <p>{user.name}</p>
           <p>{chat?.lastMessage?.body}</p>
         </div>
-        <span>05:14 pm</span>
+        <span>{formatTime(chat?.lastMessage?.createdAt)}</span>
       </div>
     </div>
   )
