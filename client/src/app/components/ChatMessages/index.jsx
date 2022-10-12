@@ -18,7 +18,7 @@ function ChatMessages ({ selectedChat, socket }) {
   }, [selectedChat])
 
   useEffect(() => {
-    socket.on('message received', (msg) => {
+    socket.on('message received', async (msg) => {
       console.log('message received => add msg to body', msg)
       setMessages([...messages, msg])
     })

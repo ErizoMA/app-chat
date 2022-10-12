@@ -9,7 +9,6 @@ import chatRoute from "./routes/chatRoute.js";
 import messageRoute from "./routes/messageRoute.js";
 import { verifyToken } from "./middlewares/auth.js";
 import { PORT } from "./config.js";
-import { userInfo } from "os";
 
 const app = express()
 const httpServer = createServer(app)
@@ -31,6 +30,7 @@ io.on('connection', (socket) => {
     const chat = msg.chat
     chat.users.forEach(user => {
       io.to(user._id).emit('message received', msg)
+      io.to(user._id).emit('notification')
     })
   })
   socket.on('disconnecting', () => {

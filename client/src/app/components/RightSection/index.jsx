@@ -8,11 +8,11 @@ import styles from './index.module.css'
 function RightSection ({ socket }) {
   const { selectedChat, userInfo } = useContext(UserContext)
 
-  const name = selectedChat.users[0]._id === userInfo._id ? selectedChat.users[1].name : selectedChat.users[0].name
+  const user = selectedChat.users[0]._id === userInfo._id ? selectedChat.users[1] : selectedChat.users[0]
 
   return (
     <div className={styles.container}>
-      <ChatHeader name={name} socket={socket} />
+      <ChatHeader user={user} socket={socket} />
       <ChatMessages selectedChat={selectedChat} socket={socket} />
       <ChatFooter selectedChat={selectedChat} socket={socket} />
     </div>

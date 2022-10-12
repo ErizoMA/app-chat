@@ -30,7 +30,6 @@ const UserProvider = (props) => {
         headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
       })
       const data = await response.json()
-      console.log('data new fetched', data)
       if (response.ok) {
         dispatch({ type: GET_CHATS, payload: data.data })
       }

@@ -1,4 +1,3 @@
-import React from 'react'
 import ArrowIcon from '../Icons/Arrow'
 import CallIcon from '../Icons/Call'
 import FavouriteIcon from '../Icons/Favoutire'
@@ -7,14 +6,14 @@ import SearchIcon from '../Icons/Search'
 import VideoCallIcon from '../Icons/VideoCall'
 import styles from './index.module.css'
 
-function ChatHeader ({ name }) {
+function ChatHeader ({ user }) {
   return (
     <div className={styles.header}>
       <div className={styles.header__info}>
-        <img src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250' />
+        <img src={user.avatar} />
         <section>
           <div>
-            <h2>{name}</h2>
+            <h2>{user.name}</h2>
             <FavouriteIcon />
           </div>
           <div>

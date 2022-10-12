@@ -7,12 +7,14 @@ import styles from './index.module.css'
 function LeftSectionSearch () {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
-  const context = useContext(UserContext)
+  const { getChats, userInfo } = useContext(UserContext)
   const handleSearch = async (e) => {
     if (e.key === 'Enter') {
       const response = await fetch(`http://localhost:4000/api/user?search=${query}`)
       const data = await response.json()
-      setResults(data.data)
+      setResults(data.data.filter(e => {
+        return e._id !== userInfo._id
+      }))
     }
   }
   const handleClose = () => {
@@ -20,8 +22,9 @@ function LeftSectionSearch () {
     setResults([])
   }
   const createNewChat = async (id) => {
-    const res = await createChat(id)
-    console.log(res)
+    await createChat(id)
+    await getChats()
+    handleClose()
   }
   return (
     <div className={styles.container}>
