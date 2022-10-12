@@ -1,6 +1,8 @@
+import { CREATE_CHAT, GET_CHATS } from './config'
+
 export const createChat = async (id) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_CREATE_CHAT, {
+    const response = await fetch(CREATE_CHAT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) },
       body: JSON.stringify({ userId: id }),
@@ -14,7 +16,7 @@ export const createChat = async (id) => {
 
 export const getChats = async () => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_GET_CHATS, {
+    const response = await fetch(GET_CHATS, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
     })

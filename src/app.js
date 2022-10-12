@@ -4,6 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import path from "path";
 import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";
 import messageRoute from "./routes/messageRoute.js";
@@ -49,6 +50,15 @@ app.use(morgan('tiny'))
 app.use("/api/user", userRoute)
 app.use("/api/chat", verifyToken, chatRoute)
 app.use("/api/message", verifyToken, messageRoute)
+
+// DEPLOY
+
+const __dirname = path.resolve()
+
+app.use(express.static(path.join(__dirname, "../client/dist")))
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+// })
 
 httpServer.listen(PORT)
 

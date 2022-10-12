@@ -5,9 +5,10 @@ import LeftSection from '../../components/LeftSection'
 import RightSection from '../../components/RightSection'
 import RightSectionEmpty from '../../components/RightSectionEmpty'
 import UserContext from '../../context/UserContext'
+import { SERVER_PORT } from '../../services/config'
 import styles from './index.module.css'
 
-const socket = io(import.meta.env.VITE_SERVER_PORT)
+const socket = io(SERVER_PORT)
 
 function Chat () {
   const { selectedChat, userInfo } = useContext(UserContext)

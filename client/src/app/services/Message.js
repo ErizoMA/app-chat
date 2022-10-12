@@ -1,6 +1,8 @@
+import { CREATE_MESSAGE, GET_MESSAGES } from './config'
+
 export const createMessage = async (selectedChat, message) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_CREATE_MESSAGE, {
+    const response = await fetch(CREATE_MESSAGE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) },
       body: JSON.stringify({
@@ -17,7 +19,7 @@ export const createMessage = async (selectedChat, message) => {
 
 export const getMessages = async (selectedChat) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_GET_MESSAGES + '/' + selectedChat._id, {
+    const response = await fetch(GET_MESSAGES + '/' + selectedChat._id, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
     })

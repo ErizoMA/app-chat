@@ -1,6 +1,8 @@
+import { LOGIN, REGISTER, SEARCH_USER } from './config'
+
 export const login = async (form) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_LOGIN, {
+    const response = await fetch(LOGIN, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
@@ -14,7 +16,7 @@ export const login = async (form) => {
 
 export const register = async (form) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_REGISTER, {
+    const response = await fetch(REGISTER, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
@@ -28,7 +30,7 @@ export const register = async (form) => {
 
 export const searchUser = async (query) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_SEARCH_USER + query)
+    const response = await fetch(SEARCH_USER + query)
     return { status: response.status, ok: response.ok, data: await response.json() }
   } catch (error) {
     console.log(error)
