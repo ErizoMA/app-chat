@@ -47,15 +47,15 @@ app.use(express.json())
 app.use(morgan('tiny'))
 
 // ROUTES
+const __dirname = path.resolve()
+app.use("/", express.static(path.join(__dirname, "../client/dist")))
 app.use("/api/user", userRoute)
 app.use("/api/chat", verifyToken, chatRoute)
 app.use("/api/message", verifyToken, messageRoute)
 
 // DEPLOY
 
-const __dirname = path.resolve()
 
-app.use(express.static(path.join(__dirname, "../client/dist")))
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
 // })
