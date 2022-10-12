@@ -8,7 +8,7 @@ import UserContext from '../../context/UserContext'
 import { SERVER_PORT } from '../../services/config'
 import styles from './index.module.css'
 
-const socket = io(SERVER_PORT)
+const socket = io('https://app-chat-develop.up.railway.app/')
 
 function Chat () {
   const { selectedChat, userInfo } = useContext(UserContext)
