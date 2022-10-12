@@ -58,6 +58,8 @@ app.use("/api/message", verifyToken, messageRoute)
 
 app.use("/", express.static(join(__dirname, "../client/dist")))
 
-httpServer.listen(PORT)
+httpServer.listen(PORT, () => {
+  console.log("Server running on PORT", PORT)
+})
 
 export default app;
