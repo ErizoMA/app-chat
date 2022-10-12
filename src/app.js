@@ -8,13 +8,13 @@ import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";
 import messageRoute from "./routes/messageRoute.js";
 import { verifyToken } from "./middlewares/auth.js";
-import { PORT } from "./config.js";
+import { PORT, CLIENT_PORT } from "./config.js";
 
 const app = express()
 const httpServer = createServer(app)
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: 'http://localhost:5173'
+    origin: CLIENT_PORT
   }
 })
 

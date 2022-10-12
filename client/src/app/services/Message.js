@@ -1,26 +1,29 @@
-export const createChat = async (id) => {
+export const createMessage = async (selectedChat, message) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_CREATE_CHAT, {
+    const response = await fetch(import.meta.env.VITE_APP_CREATE_MESSAGE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) },
-      body: JSON.stringify({ userId: id }),
-      mode: 'cors'
+      body: JSON.stringify({
+        body: message,
+        chatId: selectedChat._id
+      })
     })
     return { status: response.status, ok: response.ok, data: await response.json() }
   } catch (error) {
+    console.error(error)
     throw new Error(error.message)
   }
 }
 
-export const getChats = async () => {
+export const getMessages = async (selectedChat) => {
   try {
-    const response = await fetch(import.meta.env.VITE_APP_GET_CHATS, {
+    const response = await fetch(import.meta.env.VITE_APP_GET_MESSAGES + '/' + selectedChat._id, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
     })
     return { status: response.status, ok: response.ok, data: await response.json() }
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
     throw new Error(error.message)
   }
 }

@@ -7,7 +7,7 @@ import RightSectionEmpty from '../../components/RightSectionEmpty'
 import UserContext from '../../context/UserContext'
 import styles from './index.module.css'
 
-const socket = io('http://localhost:4000')
+const socket = io(import.meta.env.VITE_SERVER_PORT)
 
 function Chat () {
   const { selectedChat, userInfo } = useContext(UserContext)

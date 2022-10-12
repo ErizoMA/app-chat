@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { createMessage } from '../../services/Message'
 import EmojiIcon from '../Icons/Emoji'
 import PlusIcon from '../Icons/Plus'
 import VoiceIcon from '../Icons/Voice'
@@ -7,15 +8,7 @@ function ChatFooter ({ selectedChat, socket }) {
   const [message, setMessage] = useState('')
   const handleMessage = async (e) => {
     if (e.key === 'Enter') {
-      const response = await fetch('http://localhost:4000/api/message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) },
-        body: JSON.stringify({
-          body: message,
-          chatId: selectedChat._id
-        })
-      })
-      const data = await response.json()
+      const { data } = await createMessage(selectedChat, message)
       socket.emit('new message', data.data)
       setMessage('')
     }

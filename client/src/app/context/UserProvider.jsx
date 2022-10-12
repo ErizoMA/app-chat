@@ -2,6 +2,7 @@ import UserContext from './UserContext'
 import UserReducer from './UserReducer'
 import { useReducer } from 'react'
 import * as AuthService from '../services/Auth'
+import * as ChatService from '../services/Chat'
 import { GET_CHATS, LOGIN, REGISTER, SELECT_CHAT } from './types'
 
 const UserProvider = (props) => {
@@ -24,18 +25,9 @@ const UserProvider = (props) => {
     }
   }
   const getChats = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/api/chat', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
-      })
-      const data = await response.json()
-      if (response.ok) {
-        dispatch({ type: GET_CHATS, payload: data.data })
-      }
-      console.log(data)
-    } catch (error) {
-      console.log(error.message)
+    const { status, ok, data } = await ChatService.getChats()
+    if (ok && status === 200) {
+      dispatch({ type: GET_CHATS, payload: data.data })
     }
   }
 

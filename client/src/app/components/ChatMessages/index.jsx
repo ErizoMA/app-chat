@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getMessages } from '../../services/Message'
 import LockIcon from '../Icons/Lock'
 import SingleMessage from '../SingleMessage'
 import styles from './index.module.css'
@@ -6,11 +7,7 @@ function ChatMessages ({ selectedChat, socket }) {
   const [messages, setMessages] = useState([])
   useEffect(() => {
     const fetchMessages = async () => {
-      const response = await fetch(`http://localhost:4000/api/message/${selectedChat._id}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: JSON.parse(localStorage.getItem('token')) }
-      })
-      const data = await response.json()
+      const { data } = await getMessages(selectedChat)
       setMessages(data.data)
     }
 
@@ -19,7 +16,6 @@ function ChatMessages ({ selectedChat, socket }) {
 
   useEffect(() => {
     socket.on('message received', async (msg) => {
-      console.log('message received => add msg to body', msg)
       setMessages([...messages, msg])
     })
     return () => {

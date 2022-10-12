@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import UserContext from '../../context/UserContext'
+import { searchUser } from '../../services/Auth'
 import { createChat } from '../../services/Chat'
 import CloseIcon from '../Icons/Close'
 import styles from './index.module.css'
@@ -10,8 +11,7 @@ function LeftSectionSearch () {
   const { getChats, userInfo } = useContext(UserContext)
   const handleSearch = async (e) => {
     if (e.key === 'Enter') {
-      const response = await fetch(`http://localhost:4000/api/user?search=${query}`)
-      const data = await response.json()
+      const { data } = await searchUser(query)
       setResults(data.data.filter(e => {
         return e._id !== userInfo._id
       }))

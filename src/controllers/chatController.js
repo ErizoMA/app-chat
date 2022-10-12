@@ -41,11 +41,15 @@ export const createChat = async (req, res) => {
 }
 
 export const indexChats = async (req, res) => {
+  try {
+    let chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+      .populate("lastMessage")
+      .populate("users", "-password")
 
-  let chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
-    .populate("lastMessage")
-    .populate("users", "-password")
-
-  chats = await User.populate(chats, { path: "lastMessage.createdBy", select: "name avatar email" })
-  return res.status(200).json({ data: chats })
+    chats = await User.populate(chats, { path: "lastMessage.createdBy", select: "name avatar email" })
+    return res.status(200).json({ data: chats })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: error.message })
+  }
 }
