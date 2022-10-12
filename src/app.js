@@ -4,7 +4,8 @@ import { Server as SocketServer } from "socket.io";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import path from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";
 import messageRoute from "./routes/messageRoute.js";
@@ -12,6 +13,7 @@ import { verifyToken } from "./middlewares/auth.js";
 import { PORT, CLIENT_PORT } from "./config.js";
 
 const app = express()
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const httpServer = createServer(app)
 const io = new SocketServer(httpServer, {
   cors: {
@@ -47,18 +49,14 @@ app.use(express.json())
 app.use(morgan('tiny'))
 
 // ROUTES
-const __dirname = path.resolve()
-app.use("/", express.static(path.join(__dirname, "../client/dist")))
+
 app.use("/api/user", userRoute)
 app.use("/api/chat", verifyToken, chatRoute)
 app.use("/api/message", verifyToken, messageRoute)
 
-// DEPLOY
+// STATIC
 
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
-// })
+app.use("/", express.static(join(__dirname, "../client/dist")))
 
 httpServer.listen(PORT)
 
