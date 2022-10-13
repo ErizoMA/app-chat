@@ -4,7 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { join, dirname } from "path";
+import { join, dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";
@@ -57,6 +57,9 @@ app.use("/api/message", verifyToken, messageRoute)
 // STATIC
 
 app.use("/", express.static(join(__dirname, "../client/dist")))
+app.get("*", (req, res) => {
+  res.sendFile(resolve(__dirname, "client", "dist", "index.html"))
+})
 
 httpServer.listen(PORT, () => {
   console.log("Server running on PORT", PORT)
