@@ -4,7 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { join, dirname, resolve } from "path";
+import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";

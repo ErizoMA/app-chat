@@ -4,7 +4,6 @@ import { SECRET } from "../config.js";
 import User from "../models/user.js"
 
 export const loginUser = async (req, res) => {
-  console.log(req.body)
   try {
     const { email, password } = req.body
     if (!email || !password) return res.status(400).json({ message: "Missing fields" })
@@ -25,7 +24,6 @@ export const loginUser = async (req, res) => {
 }
 
 export const registerUser = async (req, res) => {
-  console.log(req.body)
   try {
     const { email, password, name, avatar } = req.body
     if (!name || !email || !password) return res.status(400).json({ message: "Missing fields" })
