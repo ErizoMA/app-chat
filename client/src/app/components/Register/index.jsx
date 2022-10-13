@@ -24,7 +24,7 @@ function Register ({ toggleScreen }) {
         <input className={styles.input} placeholder='Avatar' value={form.avatar} onChange={(e) => setForm({ ...form, avatar: e.target.value })} />
         <input className={styles.input} placeholder='Password' type='password' value={form.password} minLength='6' required onChange={(e) => setForm({ ...form, password: e.target.value })} />
         {/* <input className={styles.input} placeholder='Confirm Password' type='password' value={form.cpassword} required minLength='6' onChange={(e) => setForm({ ...form, cpassword: e.target.value })} /> */}
-        <button className={styles.btnSubmit} onClick={(e) => handleSubmit(e)}>
+        <button className={styles.btnSubmit} onClick={handleSubmit}>
           CREATE ACCOUNT
         </button>
       </form>
